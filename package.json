@@ -1,0 +1,17 @@
+{
+  "name": "courseMgmtServer",
+  "version": "1.0.0",
+  "description": "course management server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "express-session": "^1.15.6",
+    "mongoose": "*"
+  },
+  "author": "Priyaranjan",
+  "license": "ISC"
+}
