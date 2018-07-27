@@ -35,6 +35,8 @@ db.once('open', function () {
 
 var user_Service = require('./service/user.service.server');
 user_Service(app);
+var section_Service = require('./service/section.service.server');
+section_Service(app);
 
 
 app.listen(process.env.PORT || 3000, function(){

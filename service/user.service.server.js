@@ -32,7 +32,7 @@ module.exports = function (app) {
         userModel.login(user)
             .then(function (user) {
                 console.log(user);
-                req.session['user'] = user;
+                            req.session['user'] = user;
                 res.send(user);
             })
     });
