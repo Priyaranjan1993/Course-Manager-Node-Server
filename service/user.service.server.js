@@ -8,7 +8,7 @@ module.exports = function (app) {
 
     var session = require('express-session');
     app.use(session({
-        resave: false,
+        resave: true,
         saveUninitialized: true,
         cookie: {maxAge: 1800000},
         secret: 'any string'
@@ -32,7 +32,7 @@ module.exports = function (app) {
         userModel.login(user)
             .then(function (user) {
                 console.log(user);
-                            req.session['user'] = user;
+                req.session['user'] = user;
                 res.send(user);
             })
     });
@@ -78,6 +78,13 @@ module.exports = function (app) {
             res.send(null);
         }
 
+    });
+
+    app.get('/api/getUserId', function (req, res) {
+        var currentUserId = req.session['user'];
+        console.log("session ----- "+req.session);
+        console.log("user details ----- "+currentUserId);
+        res.send(currentUserId);
     });
 
     app.post('/api/logout', function (req, res) {

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
-var userModel = mongoose.model('user', userSchema);
+var userModel = mongoose.model('userModel', userSchema);
 
 module.exports.addUser = function (user, callback) {
     return userModel.create(user, callback);

@@ -37,6 +37,10 @@ var user_Service = require('./service/user.service.server');
 user_Service(app);
 var section_Service = require('./service/section.service.server');
 section_Service(app);
+var enroll_Service = require('./service/enroll.service.server');
+enroll_Service(app);
+var courseType_Service = require('./service/courseType.service.server');
+courseType_Service(app);
 
 
 app.listen(process.env.PORT || 3000, function(){

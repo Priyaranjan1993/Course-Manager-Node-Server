@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
 var sectionSchema = require('./section.schema.server');
-var sectionModel = mongoose.model('section', sectionSchema);
+var sectionModel = mongoose.model('sectionModel', sectionSchema);
 
-module.exports.addSection = function (section,callback) {
+module.exports.addSection = function (section, callback) {
     return sectionModel.create(section, callback);
 };
 
-module.exports.deleteSection = function (sectionId,callback) {
+module.exports.deleteSection = function (sectionId, callback) {
     var secId = {_id: sectionId};
     return sectionModel.remove(secId, callback);
 };
 
-module.exports.updateSection = function (sectionId, section, options,callback) {
+module.exports.updateSection = function (sectionId, section, options, callback) {
     var secId = {_id: sectionId};
     var update = {
         sectionName: section.sectionName,
@@ -19,7 +19,7 @@ module.exports.updateSection = function (sectionId, section, options,callback) {
         availableSeats: section.availableSeats,
         courseId: section.courseId
     };
-    return sectionModel.findOneAndUpdate(secId, update, options,callback);
+    return sectionModel.findOneAndUpdate(secId, update, options, callback);
 };
 
 module.exports.getSectionsForCourse = function (courseId) {
@@ -28,4 +28,12 @@ module.exports.getSectionsForCourse = function (courseId) {
 
 module.exports.getSectionById = function (secId) {
     return sectionModel.findOne({_id: secId})
+};
+
+module.exports.decreaseSectionSeat = function (secId) {
+    return sectionModel.update({_id: secId}, {$inc: {availableSeats: -1}})
+};
+
+module.exports.increaseSectionSeat = function (secId) {
+    return sectionModel.update({_id: secId}, {$inc: {availableSeats: +1}})
 };
