@@ -32,8 +32,8 @@ module.exports = function (app) {
         userModel.login(user)
             .then(function (user) {
                 console.log(user);
-                    req.session['user'] = user;
-                    res.send(user);
+                req.session['user'] = user;
+                res.send(user);
             })
     });
 
@@ -82,8 +82,8 @@ module.exports = function (app) {
 
     app.get('/api/getUserId', function (req, res) {
         var currentUserId = req.session['user'];
-        console.log("session ----- "+req.session);
-        console.log("user details ----- "+currentUserId);
+        console.log("session ----- " + req.session);
+        console.log("user details ----- " + currentUserId);
         res.send(currentUserId);
     });
 
@@ -94,6 +94,16 @@ module.exports = function (app) {
         }
         else {
             res.send("Session not set !!")
+        }
+    })
+
+    app.delete('/api/profile', function (req, res) {
+        if (req.session && req.session['user']) {
+            var userId = req.session['user']._id;
+            userModel.deleteUser(userId)
+                .then((data) => {
+                    res.send(data);
+                })
         }
     })
 

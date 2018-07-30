@@ -31,3 +31,7 @@ module.exports.saveProfile = function (profile, id, callback) {
     };
     return userModel.findOneAndUpdate(id, updateProfile, callback);
 };
+
+module.exports.deleteUser = function (userId) {
+    return userModel.remove({_id: userId});
+};
