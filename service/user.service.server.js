@@ -32,8 +32,8 @@ module.exports = function (app) {
         userModel.login(user)
             .then(function (user) {
                 console.log(user);
-                req.session['user'] = user;
-                res.send(user);
+                    req.session['user'] = user;
+                    res.send(user);
             })
     });
 
@@ -55,7 +55,7 @@ module.exports = function (app) {
             })
     });
 
-    app.post('/api/profile', function (req, res) {
+    app.put('/api/profile', function (req, res) {
         if (req.session && req.session['user']) {
             var user = req.session['user'];
             var id = user._id;

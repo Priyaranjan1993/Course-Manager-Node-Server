@@ -1,6 +1,7 @@
 module.exports = function (app) {
 
     var sectionModel = require('../models/section/section.model.server');
+    var enrollModel = require('../models/enroll/enroll.model.server');
 
     var session = require('express-session');
     app.use(session({
@@ -25,7 +26,10 @@ module.exports = function (app) {
         sectionModel.deleteSection(secId)
             .then(function (result) {
                 console.log(result);
-                res.send(result);
+                enrollModel.removeStudentsAfterDeletion(secId)
+                    .then((data) => {
+                        res.send(data);
+                    })
             })
     });
 
@@ -48,7 +52,7 @@ module.exports = function (app) {
     app.put('/api/section/:sectionId', function (req, res) {
         var sectionData = req.body;
         var sectionId = req.params.sectionId;
-        sectionModel.updateSection(sectionId, sectionData,{})
+        sectionModel.updateSection(sectionId, sectionData, {})
             .then(function (response) {
                 console.log(response);
                 res.send(response);

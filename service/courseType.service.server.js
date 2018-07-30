@@ -37,4 +37,12 @@ module.exports = function (app) {
             });
     });
 
+    app.get('/api/course/type/:courseId/checkType', function (req, res) {
+        var cId = req.params.courseId;
+        courseTypeModel.checkIfExists(cId)
+            .then(response => {
+                    console.log(response);
+                    res.send(response);
+            });
+    });
 };
